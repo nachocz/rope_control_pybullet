@@ -1,20 +1,23 @@
 robot:
-  start_position: [0.0, 0.0, 0.0]  # Initial robot base position [x, y, z]
-  start_orientation: [0.0, 0.0, 0.0]  # Initial robot base orientation [roll, pitch, yaw]
-  initial_joint_positions: [0.0, -0.8, 0.0, -1.8, 0.0, 1.5, 0.0]  # New joint angles to extend the arm outward
+  start_position: [0, 0, 0]
+  start_orientation: [0, 0, 0]
+  initial_joint_positions: [0, -0.5, 0.3, -1.0, 0.0, 1.0, 0.785]
 
 rope:
-  length: 0.5  # Length of the rope in meters
-  num_segments: 15  # Number of segments in the rope
-  segment_radius: 0.01  # Radius of each rope segment
-  segment_mass: 0.01 # Mass of each rope segment
-  start_position: [0.5, 0.5, 1.0]  # Start position of the first rope segment
+  length: 0.5
+  num_segments: 15
+  segment_radius: 0.01
+  segment_mass: 0.05
 
 simulation:
-  gravity: [0, 0, -9.81]  # Gravity in the simulation
-  time_step: 0.0041667  # Time step for the simulation loop
-  duration: 10  # Duration of the simulation
+  gravity: [0, 0, -9.81]
+  time_step: 0.01
+  duration: 10
 
 trajectory:
-  amplitude: 0.2 # Amplitude of the oscillating motion
-  frequency: 0.4 # Frequency of the oscillation
+  x_amplitude: 2.0
+  y_amplitude: 0.0
+  z_amplitude: 0.0
+  x_frequency: 0.5
+  y_frequency: 0.0
+  z_frequency: 0.0
