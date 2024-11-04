@@ -1,0 +1,16 @@
+# Ignore Python cache
+__pycache__/
+*.pyc
+
+# Ignore CSV and PNG files
+*.csv
+*.png
+
+# Ignore log files
+*.log
+
+# Ignore virtual environments
+venv/
+
+# Ignore user-specific configuration files
+config/experiment_1.yaml

@@ -1,0 +1,100 @@
+# Roadmap: Controlling Rope Dynamics with a Robot Arm
+
+## Phase 1: Define Project Scope and Setup
+
+### 1. High-Level Requirements Gathering
+- Define key objectives:
+  - Simulate rope dynamics.
+  - Control the robot arm and rope dynamics.
+  - Compare DMDc and Reinforcement Learning (RL) approaches.
+- Establish performance indicators (e.g., accuracy, robustness, smoothness, efficiency).
+
+### 2. Tools and Software Setup
+- Select **PyBullet** as the simulation environment.
+- Install required packages: PyBullet, NumPy, TensorFlow/PyTorch, SciPy, Matplotlib.
+- Test environment setup: Load a Franka Panda robot arm model in PyBullet.
+
+### 3. Simulation Environment Preparation
+- Develop base environment class (`RopeSimulationEnv`):
+  - Load robot arm and rope models.
+  - Define a step function for control and simulation.
+- **Test 1**: Verify proper loading and movement of the arm and realistic rope behavior.
+
+## Phase 2: Basic Dynamics of Rope and Robot
+
+### 1. Rope Modeling and Dynamics
+- Represent rope as connected rigid bodies (chain of joints).
+- Adjust properties like mass, damping, and stiffness for realistic dynamics.
+- **Test 2**: Move the arm with simple trajectories, adjusting parameters until rope behaves realistically.
+
+### 2. Basic Robot Arm Control
+- Implement inverse kinematics (IK) for end-effector control.
+- Develop an interface for specifying end-effector positions.
+- **Test 3**: Test various movements of the end-effector and observe rope movement.
+
+## Phase 3: Develop Control Strategies (DMDc & RL)
+
+### 1. Collect Data for DMDc
+- Use simple movements to collect data for rope dynamics (positions and velocities).
+- Store states and actions for DMDc training.
+- **Test 4**: Verify the data collection process by visualizing trajectories.
+
+### 2. DMDc Implementation
+- Implement **Dynamic Mode Decomposition with Control (DMDc)**.
+- Use collected data to build a control model and implement an LQR controller.
+- **Test 5**: Test the DMDc-based controller to ensure it controls the rope's loose end accurately.
+
+### 3. Reinforcement Learning Setup
+- Create RL environment with OpenAI Gym-style interface.
+  - Define states, actions, and rewards.
+- **Test 6**: Train an RL agent for simple tasks and verify early performance.
+
+## Phase 4: Incremental Improvement & Testing
+
+### 1. Progressively Complexify Control Tasks
+- Start with simple control tasks (e.g., bring loose end to target point).
+- Increase task complexity (e.g., follow a trajectory with multiple target points).
+- **Test 7**: Visualize each task's performance for both DMDc and RL controllers.
+
+### 2. Compare Control Strategies
+- Compare **DMDc** and **RL** approaches based on accuracy, stability, efficiency, and robustness.
+- **Test 8**: Run comparisons and record key metrics for both strategies.
+
+## Phase 5: Evaluation and Fine-Tuning
+
+### 1. Hyperparameter Tuning
+- Optimize DMDc and RL hyperparameters (e.g., learning rate, modes).
+- Use cross-validation for parameter optimization.
+- **Test 9**: Re-run experiments with optimized parameters and compare improvements.
+
+### 2. Edge Cases and Robustness Testing
+- Test for edge cases: abrupt movements, high-speed oscillations, disturbances.
+- Improve robustness to generalize to diverse scenarios.
+- **Test 10**: Perform stress tests and evaluate controllers’ robustness.
+
+## Phase 6: Documentation and Visualization
+
+### 1. Visualization Tools
+- Develop visualization tools for movement trajectories and performance metrics.
+- Create a dashboard or GUI for real-time simulation interaction.
+
+### 2. Documentation
+- Document each module, setup instructions, and key functions.
+- Include notes on best practices for tuning and expected behavior.
+
+### 3. Final Comparison and Report
+- Summarize findings from **DMDc** and **RL** comparison.
+- Highlight strengths, weaknesses, and potential use cases.
+- **Test 11**: Prepare a comprehensive report including plots and analyses.
+
+## Implementation Considerations
+- **Physics Fidelity**: Consider PyBullet limitations, and potentially use Mujoco or SOFA for more precise physics.
+- **Debugging Tools**: Use tools like Matplotlib to visualize trajectories.
+- **Computation Resources**: Reinforcement learning may require cloud or GPU resources.
+
+## Incremental Testing Summary
+- Testing at every stage is crucial to catch errors early.
+- Visual inspection of robot and rope movement ensures physical plausibility.
+
+---
+This roadmap provides a structured, phased approach to building and comparing the control strategies for a robot arm holding a rope.
