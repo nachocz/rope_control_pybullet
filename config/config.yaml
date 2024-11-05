@@ -21,3 +21,7 @@ trajectory:
   x_frequency: 0.5
   y_frequency: 0.0
   z_frequency: 0.0
+
+logging:
+  robot_log_path: "logs/robot_states_log.csv"
+  rope_log_path: "logs/rope_states_log.csv"
