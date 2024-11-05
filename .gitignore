@@ -1,16 +1,23 @@
-# Ignore Python cache
+# Python
 __pycache__/
-*.pyc
+*.py[cod]
+*.pyo
 
-# Ignore CSV and PNG files
-*.csv
-*.png
-
-# Ignore log files
+# Logs
+logs/
 *.log
+*.csv
 
-# Ignore virtual environments
+# Virtual Environment
 venv/
+.env
 
-# Ignore user-specific configuration files
-config/experiment_1.yaml
+# Config files
+*.yaml
+
+# Jupyter Notebooks checkpoints
+.ipynb_checkpoints/
+
+# OS generated files
+.DS_Store
+Thumbs.db
