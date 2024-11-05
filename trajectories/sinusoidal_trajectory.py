@@ -4,22 +4,20 @@ import numpy as np
 class SinusoidalTrajectory(TrajectoryBase):
     def __init__(self, params):
         super().__init__(params)
-        self.current_offset = [0.0, 0.0, 0.0]  # Initially, no offset
+        self.params = params
+        self.x_amplitude = params['x_amplitude']  # Total amplitude
+        self.y_amplitude = params['y_amplitude']
+        self.z_amplitude = params['z_amplitude']
+        self.x_frequency = params['x_frequency']
+        self.y_frequency = params['y_frequency']
+        self.z_frequency = params['z_frequency']
 
     def get_target_position(self, t):
-        # Retrieve amplitude and frequency from parameters
-        x_amplitude = self.params['x_amplitude']
-        y_amplitude = self.params['y_amplitude']
-        z_amplitude = self.params['z_amplitude']
-        x_frequency = self.params['x_frequency']
-        y_frequency = self.params['y_frequency']
-        z_frequency = self.params['z_frequency']
-
-        # Calculate the incremental offset
-        self.current_offset = [
-            x_amplitude * np.sin(2 * np.pi * x_frequency * t),
-            y_amplitude * np.sin(2 * np.pi * y_frequency * t),
-            z_amplitude * np.sin(2 * np.pi * z_frequency * t)
+        # Calculate target offset for each axis at time t using full amplitude
+        target_offset = [
+            self.x_amplitude * np.sin(2 * np.pi * self.x_frequency * t),
+            self.y_amplitude * np.sin(2 * np.pi * self.y_frequency * t),
+            self.z_amplitude * np.sin(2 * np.pi * self.z_frequency * t)
         ]
 
-        return self.current_offset
+        return target_offset

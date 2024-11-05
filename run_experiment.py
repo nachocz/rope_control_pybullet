@@ -27,7 +27,7 @@ robot_control = RobotControl(config['robot'])
 logger = Logger(config)
 
 # Move the end-effector to the initial position
-initial_end_effector_position = [0.5, 0.0, 0.6]  # Initial position
+initial_end_effector_position = [0.4, 0.0, 0.6]  # Initial position
 robot_control.move_end_effector(initial_end_effector_position)
 
 # Let the robot stabilize at the initial position
@@ -57,14 +57,17 @@ trajectory = SinusoidalTrajectory(config['trajectory'])
 t = 0
 dt = config['simulation']['time_step']
 simulation_duration = config['simulation']['duration']
+target_position= initial_end_effector_position
 
 while t < simulation_duration:
     # Get incremental target position from the trajectory
     increment = trajectory.get_target_position(t)
+    #print(f"Time: {t:.2f}s, Incremental Target Position: x={increment[0]:.4f}, y={increment[1]:.4f}, z={increment[2]:.4f}")
 
     # Move the end effector incrementally
     current_position = robot_control.get_end_effector_position()
-    target_position = [current_position[i] + increment[i] for i in range(3)]
+    target_position = [initial_end_effector_position[i] + increment[i] for i in range(3)]
+
     robot_control.move_end_effector(target_position)
 
     # Step the simulation

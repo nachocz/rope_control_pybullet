@@ -17,7 +17,7 @@ class RobotControl:
 
     def move_end_effector(self, target_position):
         """
-        Move the end effector to a given target position.
+        Move the end effector to a given target position using inverse kinematics.
         
         Args:
         - target_position (list): The target (x, y, z) coordinates for the end effector.
@@ -27,16 +27,21 @@ class RobotControl:
             self.robot_id, self.end_effector_index, target_position
         )
         
-        # Apply the joint positions to move the robot towards the target
+        # Set each joint's position directly
         for i in range(len(joint_poses)):
             p.setJointMotorControl2(
                 self.robot_id,
                 i,
                 p.POSITION_CONTROL,
-                joint_poses[i],
-                force=500,  # Set a reasonable force value to control the speed and accuracy
-                maxVelocity=0.35  # Limit the maximum velocity to ensure smooth motion
+                targetPosition=joint_poses[i]
             )
+
+        # Step the simulation for smooth transition
+        p.stepSimulation()
+
+        # Print actual end-effector position for verification
+        actual_position = self.get_end_effector_position()
+        #print(f"Target Position: {target_position}, Actual Position: {actual_position}")
 
     def get_end_effector_position(self):
         """
