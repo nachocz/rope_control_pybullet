@@ -41,7 +41,7 @@ rope_setup.add_segment_constraints()
 rope_setup.add_ghost_anchor(initial_end_effector_position)
 
 # Stabilization with ghost anchor
-stabilization_time = 2.0
+stabilization_time = 5.0
 for _ in range(int(stabilization_time / config['simulation']['time_step'])):
     p.stepSimulation()
     time.sleep(config['simulation']['time_step'] / 10)

@@ -1,20 +1,31 @@
 import csv
 import os
 import pybullet as p
+from datetime import datetime
 
 class Logger:
-    def __init__(self, config):
+    def __init__(self, config, log_dir=None):
         self.config = config
-        self.robot_log_path = config['logging']['robot_log_path']
-        self.rope_log_path = config['logging']['rope_log_path']
         
+        # Determine the log directory or use default from config
+        if log_dir:
+            self.robot_log_path = os.path.join(log_dir, "robot_states_log.csv")
+            self.rope_log_path = os.path.join(log_dir, "rope_states_log.csv")
+        else:
+            self.robot_log_path = config['logging']['robot_log_path']
+            self.rope_log_path = config['logging']['rope_log_path']
+        
+        # Ensure directory exists
+        os.makedirs(os.path.dirname(self.robot_log_path), exist_ok=True)
+        os.makedirs(os.path.dirname(self.rope_log_path), exist_ok=True)
+
         # Open files for logging
         self.robot_log_file = open(self.robot_log_path, mode='w', newline='')
         self.rope_log_file = open(self.rope_log_path, mode='w', newline='')
-        
+
         self.robot_writer = csv.writer(self.robot_log_file)
         self.rope_writer = csv.writer(self.rope_log_file)
-        
+
         # Write headers for logs
         self._write_headers()
 

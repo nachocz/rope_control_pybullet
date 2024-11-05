@@ -126,3 +126,17 @@ class RopeSetup:
         """
         if self.ghost_anchor_constraint is not None:
             p.removeConstraint(self.ghost_anchor_constraint)
+
+    def get_rope_state(self):
+        """
+        Retrieve the current state of the rope as a flat array of x, y, z coordinates
+        for each segment.
+        
+        Returns:
+        - list: A flat list with the x, y, z positions of each rope segment.
+        """
+        rope_state = []
+        for segment_id in self.rope_segments:
+            position, _ = p.getBasePositionAndOrientation(segment_id)
+            rope_state.extend(position)
+        return rope_state

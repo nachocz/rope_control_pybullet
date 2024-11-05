@@ -25,3 +25,6 @@ trajectory:
 logging:
   robot_log_path: "logs/robot_states_log.csv"
   rope_log_path: "logs/rope_states_log.csv"
+
+output:
+  directory: "logs/"
